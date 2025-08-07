@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Equity Investments</title>
+  <link rel="stylesheet" href="css/styles.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="js/common-charts.js"></script>
+</head>
+<body>
+  <div class="pastel-header">
+    Fund-a-Mentals
+    <span style="float:right">
+      <a class="btn-outline-secondary nav-link" href="add.html">Add Investment</a>
+      <a class="btn-outline-secondary nav-link" href="sell.html">Sell Investment</a>
+      <a class="btn-outline-secondary nav-link" href="update.html">Update Investment</a>
+      <a class="btn-danger nav-link" href="index.html">Log Out</a>
+    </span>
+  </div>
+  <div class="container">
+    <div class="investment-header">Equity INVESTMENT</div>
+    <div class="info-section">
+      <div><strong>Equity Profit/Loss Over Time</strong></div>
+      <div class="investment-table">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>NAMES</th>
+              <th>AMOUNT INVESTED</th>
+              <th>PROFIT &amp; LOSS</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Equity A</td>
+              <td>₹10,000</td>
+              <td>+5%</td>
+            </tr>
+            <tr>
+              <td>Equity B</td>
+              <td>₹5,000</td>
+              <td>-3%</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="investment-info">
+        <div>Current Value: <strong>₹15,500</strong></div>
+        <div>Invested Value: <strong>₹15,000</strong></div>
+        <div>Profit: <strong>₹500</strong></div>
+        <div>Loss: <strong>₹0</strong></div>
+      </div>
+    </div>
+    <div class="chart-row">
+      <div class="chart-box">
+        <h3>Cap Category Distribution</h3>
+        <canvas id="equityDoughnut" width="320" height="320"></canvas>
+      </div>
+      <div class="chart-box">
+        <h3>Buy/Sell Transaction History</h3>
+        <canvas id="equityTransGraph" width="420" height="300"></canvas>
+      </div>
+    </div>
+  </div>
+  <script src="js/equity.js"></script>
+</body>
+</html>

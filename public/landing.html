@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Portfolio Dashboard</title>
+
+  <!-- Bootstrap CSS -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
+
+  <!-- Your existing CSS -->
+  <link rel="stylesheet" href="css/style.css" />
+
+  <style>
+    body, html {
+      height: 100%;
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    /* Sidebar styles */
+    .sidebar {
+      height: 100vh;
+      width: 220px;
+      background-color: #f2f6f9;
+      border-right: 1px solid #ccc;
+      padding: 20px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sidebar h5 {
+      text-transform: uppercase;
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+    }
+
+    .sidebar p {
+      font-weight: bold;
+      margin-bottom: 20px;
+      white-space: pre-line;
+    }
+
+    .sidebar .nav-link {
+      background-color: #ddeaf7;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      color: #000 !important;
+      font-weight: 600;
+      padding: 8px 12px;
+      transition: background-color 0.3s ease;
+    }
+
+    .sidebar .nav-link:hover {
+      background-color: #b6d4ff;
+      text-decoration: none;
+    }
+
+    .sidebar .btn-logout {
+      background-color: #f7b2ad;
+      color: #681616;
+      width: 100%;
+      border: none;
+      font-weight: 600;
+      margin-top: auto;
+    }
+
+    .sidebar .btn-logout:hover {
+      background-color: #f28c84;
+      color: white;
+    }
+
+    /* Main content alongside sidebar */
+    .main-content {
+      margin-left: 220px;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Top navbar */
+    nav.top-navbar {
+      background-color: #0d6efd;
+    }
+
+    nav.top-navbar .btn {
+      margin-left: 10px;
+      font-weight: 500;
+    }
+
+    /* Page header */
+    .page-header {
+      background-color: #6c757d;
+      color: white;
+      padding: 1rem;
+      text-align: center;
+      font-weight: 700;
+    }
+
+    /* Chart container */
+    .chart-container {
+      flex: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    /* Cards container */
+    .cards-container {
+      padding: 0 20px 20px 20px;
+      overflow-y: auto;
+      flex: 1;
+    }
+
+    /* Style adjustments for cards */
+    .investment-card {
+      width: 200px;
+      margin: 10px auto;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      border-radius: 8px;
+      border: none;
+    }
+    .card-button {
+      background-color: #d9eaff;
+      border: none;
+      color: #333;
+      font-weight: 600;
+      transition: background-color 0.3s ease;
+    }
+    .card-button:hover {
+      background-color: #b6d4ff;
+      color: #000;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid #ccc;
+      }
+      .main-content {
+        margin-left: 0;
+      }
+      nav.top-navbar .btn {
+        margin-left: 5px;
+        font-size: 14px;
+      }
+      .investment-card {
+        width: 90%;
+        max-width: 300px;
+      }
+      .cards-grid {
+        flex-wrap: wrap;
+        justify-content: center !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <h5>Fund-a-Mentals</h5>
+    <p>Welcome<br />PRAFFUL DAGA</p>
+
+    <nav class="nav flex-column mb-auto">
+      <a href="add.html" class="nav-link">Add Investment</a>
+      <a href="sell.html" class="nav-link">Sell Investment</a>
+      <a href="update.html" class="nav-link">Update Investment</a>
+    </nav>
+
+    <button class="btn btn-logout">Log Out</button>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-content">
+
+    <!-- Top Navbar -->
+    <nav class="navbar navbar-expand-lg top-navbar px-3">
+      <div class="container-fluid justify-content-end">
+        <div class="navbar-nav">
+          <a class="btn btn-light" href="home.html">Home</a>
+          <a class="btn btn-light" href="contactus.html">Contact Us</a>
+          <a class="btn btn-light" href="help.html">Help</a>
+          <a class="btn btn-light" href="faq.html">FAQ</a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Page Header -->
+    <div class="page-header">
+      <h4>PORTFOLIO MANAGEMENT</h4>
+    </div>
+
+    <!-- Chart Section -->
+    <div class="chart-container">
+      <canvas id="portfolioPieChart" width="400" height="300" style="max-width: 500px; max-height: 375px;"></canvas>
+    </div>
+
+    <!-- Cards Section -->
+    <div class="cards-container">
+      <div id="investmentCards" class="d-flex flex-row justify-content-center gap-4 flex-wrap cards-grid">
+        <!-- Investment summary cards will be inserted here dynamically -->
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- Chart helper -->
+  <script src="js/common-charts.js"></script>
+
+  <!-- Dynamic Portfolio Chart and Cards Script -->
+  <script>
+    // Helper: Create a Bootstrap card showing investment summary (profit/loss)
+    function createInvestmentCard(name, investedValue, currentValue) {
+      const profitLoss = currentValue - investedValue;
+      const profitLossPercent = investedValue > 0 ? ((profitLoss / investedValue) * 100).toFixed(2) : "0";
+      const isProfit = profitLoss >= 0;
+
+      // Fix URLs for Mutual Funds and Real Estate
+      let linkHref = name.toLowerCase().replace(/\s/g, '') + '.html';
+      if (name.toLowerCase() === 'mutual funds') linkHref = 'mutual_funds.html';
+      if (name.toLowerCase() === 'real estate') linkHref = 'real_estate.html';
+
+      const card = document.createElement("div");
+      card.className = "card investment-card text-center";
+
+      card.innerHTML = `
+        <div class="card-body">
+          <h6 class="card-title">${name}</h6>
+          <p>Invested: ₹${investedValue.toLocaleString()}</p>
+          <p>
+            P/L: <strong style="color: ${isProfit ? 'green' : 'red'};">
+              ${isProfit ? '+' : ''}${profitLossPercent}% (${isProfit ? '+' : ''}₹${profitLoss.toLocaleString()})
+            </strong>
+          </p>
+          <a href="${linkHref}" class="btn card-button w-100">View</a>
+        </div>
+      `;
+
+      return card;
+    }
+
+    // Fetch overall investment data and render pie chart + summary cards
+    fetch("http://localhost:3000/api/overall-investments")
+      .then(res => res.json())
+      .then(data => {
+        if (!Array.isArray(data) || data.length === 0) {
+          console.warn("No investment data found.");
+          return;
+        }
+
+        // Extract labels and amounts
+        const labels = data.map(d => d.category);
+        const values = data.map(d => Number(d.total));
+
+        // Render portfolio doughnut chart
+        window.makeDoughnut("portfolioPieChart", labels, values, "Overall Portfolio Distribution", "right");
+
+        // Clear existing cards
+        const cardsContainer = document.getElementById("investmentCards");
+        cardsContainer.innerHTML = "";
+
+        // For demo: assume investedValue = total * 0.95, replace with real data from your backend
+        data.forEach(item => {
+          const investedValue = Number(item.total) * 0.95; // dummy invested
+          const currentValue = Number(item.total);
+          const card = createInvestmentCard(item.category, investedValue, currentValue);
+          cardsContainer.appendChild(card);
+        });
+      })
+      .catch(err => {
+        console.error("Error loading portfolio data:", err);
+
+        // Fallback static example chart and cards
+        const fallbackLabels = ['Gold', 'Mutual Funds', 'Equity', 'Real Estate', 'International Investments'];
+        const fallbackValues = [25, 20, 20, 15, 20];
+        window.makeDoughnut("portfolioPieChart", fallbackLabels, fallbackValues, "Portfolio Distribution", 'right');
+
+        const cardsContainer = document.getElementById("investmentCards");
+        cardsContainer.innerHTML = `
+          <div class="card investment-card text-center">
+            <div class="card-body">
+              <h6 class="card-title">Gold</h6>
+              <p>Invested: ₹95,000</p>
+              <p><strong style="color: green;">+5% (+₹5,000)</strong></p>
+              <a href="gold.html" class="btn card-button w-100">View</a>
+            </div>
+          </div>
+          <div class="card investment-card text-center">
+            <div class="card-body">
+              <h6 class="card-title">Mutual Funds</h6>
+              <p>Invested: ₹76,000</p>
+              <p><strong style="color: green;">+5% (+₹4,000)</strong></p>
+              <a href="mutualfund.html" class="btn card-button w-100">View</a>
+            </div>
+          </div>
+          <div class="card investment-card text-center">
+            <div class="card-body">
+              <h6 class="card-title">Equity</h6>
+              <p>Invested: ₹76,000</p>
+              <p><strong style="color: red;">-5% (-₹4,000)</strong></p>
+              <a href="equity.html" class="btn card-button w-100">View</a>
+            </div>
+          </div>
+          <div class="card investment-card text-center">
+            <div class="card-body">
+              <h6 class="card-title">Real Estate</h6>
+              <p>Invested: ₹71,250</p>
+              <p><strong style="color: green;">+5% (+₹3,750)</strong></p>
+              <a href="real_estate.html" class="btn card-button w-100">View</a>
+            </div>
+          </div>
+        `;
+      });
+  </script>
+
+</body>
+</html>
