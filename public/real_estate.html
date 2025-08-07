@@ -2,66 +2,191 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Equity Investments</title>
-  <link rel="stylesheet" href="css/styles.css" />
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script src="js/common-charts.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Real Estate Investments</title>
+
+  <!-- Bootstrap CSS -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
+
+  <!-- Your existing CSS -->
+  <link rel="stylesheet" href="css/style.css" />
+
+  <style>
+    body, html {
+      height: 100%;
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    .sidebar {
+      height: 100vh;
+      width: 220px;
+      background-color: #f2f6f9;
+      border-right: 1px solid #ccc;
+      padding: 20px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+    }
+    .sidebar h5 {
+      text-transform: uppercase;
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+    }
+    .sidebar p {
+      font-weight: bold;
+      margin-bottom: 20px;
+      white-space: pre-line;
+    }
+    .sidebar .nav-link {
+      background-color: #ddeaf7;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      color: #000 !important;
+      font-weight: 600;
+      padding: 8px 12px;
+      transition: background-color 0.3s ease;
+    }
+    .sidebar .nav-link:hover {
+      background-color: #b6d4ff;
+      text-decoration: none;
+    }
+    .sidebar .btn-logout {
+      background-color: #f7b2ad;
+      color: #681616;
+      width: 100%;
+      border: none;
+      font-weight: 600;
+      margin-top: auto;
+    }
+    .sidebar .btn-logout:hover {
+      background-color: #f28c84;
+      color: white;
+    }
+    .main-content {
+      margin-left: 220px;
+      padding: 0 20px 20px 20px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background: #fff;
+    }
+    nav.top-navbar {
+      background-color: #0d6efd;
+    }
+    nav.top-navbar .btn {
+      margin-left: 10px;
+      font-weight: 500;
+    }
+    .page-header {
+      background-color: #6c757d;
+      color: white;
+      padding: 1rem;
+      text-align: center;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      border-radius: 5px;
+    }
+    .chart-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: center;
+      margin-bottom: 2rem;
+    }
+    .chart-box {
+      background: #f9fafc;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(80,100,180,0.05);
+      padding: 1rem;
+      min-width: 320px;
+      max-width: 420px;
+      flex: 1;
+    }
+    .chart-box h3 {
+      text-align: center;
+      margin-bottom: 1rem;
+      font-weight: 600;
+      color: #00557f;
+    }
+    @media (max-width: 768px) {
+      .sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid #ccc;
+      }
+      .main-content {
+        margin-left: 0;
+        padding: 1rem;
+      }
+      .chart-row {
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+    }
+  </style>
 </head>
 <body>
-  <div class="pastel-header">
-    Fund-a-Mentals
-    <span style="float:right">
-      <a class="btn-outline-secondary nav-link" href="add.html">Add Investment</a>
-      <a class="btn-outline-secondary nav-link" href="sell.html">Sell Investment</a>
-      <a class="btn-outline-secondary nav-link" href="update.html">Update Investment</a>
-      <a class="btn-danger nav-link" href="index.html">Log Out</a>
-    </span>
+
+  <div class="sidebar">
+    <h5>Fund-a-Mentals</h5>
+    <p>Welcome<br />PRAFFUL DAGA</p>
+
+    <nav class="nav flex-column mb-auto">
+      <a href="add.html" class="nav-link">Add Investment</a>
+      <a href="sell.html" class="nav-link">Sell Investment</a>
+      <a href="update.html" class="nav-link">Update Investment</a>
+      <a href="landing.html" class="nav-link">Dashboard</a>
+      <a href="equity.html" class="nav-link">Equity</a>
+      <a href="mutualfund.html" class="nav-link">Mutual Funds</a>
+      <a href="gold.html" class="nav-link">Gold</a>
+      <a href="real_estate.html" class="nav-link active" aria-current="page">Real Estate</a>
+    </nav>
+
+    <button class="btn btn-logout">Log Out</button>
   </div>
-  <div class="container">
-    <div class="investment-header">Real Estate INVESTMENT</div>
-    <div class="info-section">
-      <div><strong>Real Estate Profit/Loss Over Time</strong></div>
-      <div class="investment-table">
-        <table class="table">
-          <thead>
-            <tr>
-              <th>NAMES</th>
-              <th>AMOUNT INVESTED</th>
-              <th>PROFIT &amp; LOSS</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Equity A</td>
-              <td>₹10,000</td>
-              <td>+5%</td>
-            </tr>
-            <tr>
-              <td>Equity B</td>
-              <td>₹5,000</td>
-              <td>-3%</td>
-            </tr>
-          </tbody>
-        </table>
+
+  <div class="main-content">
+
+    <nav class="navbar navbar-expand-lg top-navbar px-3">
+      <div class="container-fluid justify-content-end">
+        <div class="navbar-nav">
+          <a class="btn btn-light" href="home.html">Home</a>
+          <a class="btn btn-light" href="contactus.html">Contact Us</a>
+          <a class="btn btn-light" href="help.html">Help</a>
+          <a class="btn btn-light" href="faq.html">FAQ</a>
+        </div>
       </div>
-      <div class="investment-info">
-        <div>Current Value: <strong>₹15,500</strong></div>
-        <div>Invested Value: <strong>₹15,000</strong></div>
-        <div>Profit: <strong>₹500</strong></div>
-        <div>Loss: <strong>₹0</strong></div>
-      </div>
+    </nav>
+
+    <div class="page-header">
+      <h4>Real Estate INVESTMENT</h4>
     </div>
+
     <div class="chart-row">
       <div class="chart-box">
-        <h3>Cap Category Distribution</h3>
+        <h3>Property Type Distribution</h3>
         <canvas id="reDoughnut" width="320" height="320"></canvas>
       </div>
+
       <div class="chart-box">
         <h3>Buy/Sell Transaction History</h3>
         <canvas id="reTransGraph" width="420" height="300"></canvas>
       </div>
     </div>
+
   </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="js/common-charts.js"></script>
   <script src="js/real_estate.js"></script>
+
 </body>
 </html>
