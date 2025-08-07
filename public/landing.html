@@ -257,7 +257,7 @@
     }
 
     // Fetch overall investment data and render pie chart + summary cards
-    fetch("http://localhost:3000/api/overall-investments")
+    fetch("http://localhost:3000/investments/summary")
       .then(res => res.json())
       .then(data => {
         if (!Array.isArray(data) || data.length === 0) {
@@ -278,8 +278,15 @@
 
         // For demo: assume investedValue = total * 0.95, replace with real data from your backend
         data.forEach(item => {
-          const investedValue = Number(item.total) * 0.95; // dummy invested
-          const currentValue = Number(item.total);
+          // Weighted list: 3 chances of profit (1.05–1.15), 1 chance of loss (0.95)
+const profitLossFactors = [1.05, 1.1, 1.15, 0.95];
+const randomIndex = Math.floor(Math.random() * profitLossFactors.length);
+const profitLossFactor = profitLossFactors[randomIndex];
+
+// Calculate invested value
+const investedValue = Number(item.total) / profitLossFactor;
+
+                    const currentValue = Number(item.total);
           const card = createInvestmentCard(item.category, investedValue, currentValue);
           cardsContainer.appendChild(card);
         });
@@ -298,7 +305,7 @@
             <div class="card-body">
               <h6 class="card-title">Gold</h6>
               <p>Invested: ₹95,000</p>
-              <p><strong style="color: green;">+5% (+₹5,000)</strong></p>
+              <p><strong style="color: green;">+2% (+₹5,000)</strong></p>
               <a href="gold.html" class="btn card-button w-100">View</a>
             </div>
           </div>
@@ -306,7 +313,7 @@
             <div class="card-body">
               <h6 class="card-title">Mutual Funds</h6>
               <p>Invested: ₹76,000</p>
-              <p><strong style="color: green;">+5% (+₹4,000)</strong></p>
+              <p><strong style="color: green;">+6% (+₹4,000)</strong></p>
               <a href="mutualfund.html" class="btn card-button w-100">View</a>
             </div>
           </div>
@@ -314,7 +321,7 @@
             <div class="card-body">
               <h6 class="card-title">Equity</h6>
               <p>Invested: ₹76,000</p>
-              <p><strong style="color: red;">-5% (-₹4,000)</strong></p>
+              <p><strong style="color: red;">-3% (-₹4,000)</strong></p>
               <a href="equity.html" class="btn card-button w-100">View</a>
             </div>
           </div>
@@ -322,7 +329,7 @@
             <div class="card-body">
               <h6 class="card-title">Real Estate</h6>
               <p>Invested: ₹71,250</p>
-              <p><strong style="color: green;">+5% (+₹3,750)</strong></p>
+              <p><strong style="color: green;">+4% (+₹3,750)</strong></p>
               <a href="real_estate.html" class="btn card-button w-100">View</a>
             </div>
           </div>
